@@ -141,6 +141,13 @@ func validatePortNumber(path util.Path, val interface{}) util.Errors {
 	return validateIntRange(path, val, 0, 65535)
 }
 
+func validateDefaultPDB(path util.Path, val interface{}) (errs util.Errors) {
+	if val == true {
+		fmt.Printf("%v", "asdasd")
+	}
+	return nil
+}
+
 // validateIPRangesOrStar validates IP ranges and also allow star, examples: "1.1.0.256/16,2.2.0.257/16", "*"
 func validateIPRangesOrStar(path util.Path, val interface{}) (errs util.Errors) {
 	scope.Debugf("validateIPRangesOrStar at %v: %v", path, val)
@@ -194,6 +201,9 @@ func validateCIDR(path util.Path, val interface{}) util.Errors {
 	logWithError(err, "validateCIDR (%s): ", val)
 	return util.NewErrs(err)
 }
+
+//func validateMinReplicas()
+//func validateMinAvailable()
 
 func printError(err error) {
 	if err == nil {

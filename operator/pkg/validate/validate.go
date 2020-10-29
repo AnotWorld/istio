@@ -34,11 +34,14 @@ var (
 		"Values": func(path util.Path, i interface{}) util.Errors {
 			return CheckValues(i)
 		},
+		//"Components.Pilot.Enabled": validateHpaSpec,
 		"MeshConfig":                         validateMeshConfig,
 		"Hub":                                validateHub,
 		"Tag":                                validateTag,
 		"Components.IngressGateways[*].Name": validateGatewayName,
 		"Components.EgressGateways[*].Name":  validateGatewayName,
+
+		//"Components.Pilot.K8S.HPaSpec": validateHpaSpec,
 	}
 	// requiredValues lists all the values that must be non-empty.
 	requiredValues = map[string]bool{}
@@ -200,4 +203,11 @@ func validateGatewayName(path util.Path, val interface{}) util.Errors {
 		return nil
 	}
 	return validateWithRegex(path, val, ObjectNameRegexp)
+}
+
+func validateHpaSpec(path util.Path, val interface{}) util.Errors {
+	if val == true {
+		fmt.Printf("abc")
+	}
+	return nil
 }

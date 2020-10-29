@@ -28,6 +28,8 @@ var (
 		"global.proxy.excludeIPRanges":     validateIPRangesOrStar,
 		"global.proxy.includeInboundPorts": validateStringList(validatePortNumberString),
 		"global.proxy.excludeInboundPorts": validateStringList(validatePortNumberString),
+		"global.defaultPodDisruptionBudget.enabled": validateDefaultPDB,
+		"Components.Pilot.Enabled": validateHpaSpec,
 		"meshConfig":                       validateMeshConfig,
 	}
 )
@@ -42,6 +44,7 @@ func CheckValues(root interface{}) util.Errors {
 	if err := util.UnmarshalWithJSONPB(string(vs), val, false); err != nil {
 		return util.Errors{err}
 	}
+
 	return ValuesValidate(DefaultValuesValidations, root, nil)
 }
 
